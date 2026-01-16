@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext  } from '../Auth';
+
 const Login = () => {
+    const{setaccess}=useContext(AuthContext )
     const navigate=useNavigate();
     const[field,setfield]=useState({email:"",password:""})
-    const[access,setaccess]=useState("")
+   
     const handlechange=(e)=>{
         setfield({
             ...field,[e.target.name]:e.target.value
@@ -15,6 +18,7 @@ const Login = () => {
 
  
 const login=async()=>{
+  
 if (!field.email || !field.password){
     return alert("fill the fields")
 }
@@ -23,12 +27,10 @@ const payload={
     password:field.password
 }
 const loginurl=await axios.post("http://localhost:4000/apis/login",payload,{withCredentials:true})
-const access=loginurl.data.access;
-
-
-setaccess(access)
 if(loginurl.data.success){
-    console.log(access)
+   
+    const access=loginurl.data.access;
+    setaccess(access)
     return navigate("/home")
 }
    
