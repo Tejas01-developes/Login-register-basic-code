@@ -29,8 +29,8 @@ const payload={
 const loginurl=await axios.post("http://localhost:4000/apis/login",payload,{withCredentials:true})
 if(loginurl.data.success){
    
-    const access=loginurl.data.access;
-    setaccess(access)
+    // const access=loginurl.data.access;
+    // setaccess(access)
     return navigate("/home")
 }
    

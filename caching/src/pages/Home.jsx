@@ -15,7 +15,7 @@ const navigate=useNavigate()
             const accessurl=await axios.post("http://localhost:4000/apis/refresh",{},{withCredentials:true});
             if(accessurl.data.success){
             setaccess(accessurl.data.access)
-           
+           setloading(false)
             }else{
             
                 navigate("/")
